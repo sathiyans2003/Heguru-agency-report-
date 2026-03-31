@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heguru – Agency Performance & Work Report</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #f97316;
+            --highlight: #fbbf24;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --glass: rgba(255, 255, 255, 0.7);
+            --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(145deg, #f4f7fb 0%, #eef2f9 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .brand-section h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+        }
+
+        .brand-section p {
+            color: var(--muted);
+            font-size: 15px;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .date-badge {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border-radius: 100px 100px 0 0;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid transparent;
+            border-bottom: none;
+            color: var(--muted);
+            transition: var(--transition);
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            background: white;
+            border-color: var(--border);
+            border-bottom-color: white;
+            margin-bottom: -1px;
+            box-shadow: 0 -4px 10px -2px rgb(0 0 0 / 0.02);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SUMMARY TOP CARDS */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .summary-card {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .summary-card.spend::before {
+            background: var(--accent);
+        }
+
+        .summary-card.leads::before {
+            background: var(--green);
+        }
+
+        .summary-card.cpl::before {
+            background: var(--blue);
+        }
+
+        .summary-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .summary-value {
+            font-size: 40px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .summary-subtext {
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trend-up {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* SECTIONS */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .line-accent {
+            height: 4px;
+            width: 40px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* MONTHLY COMPARISON */
+        .monthly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .month-card {
+            background: var(--card);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .month-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .month-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .month-badge {
+            font-size: 11px;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .month-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .mini-stat {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .mini-stat:hover {
+            background: white;
+            border-color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mini-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .mini-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+        }
+
+        /* CHART BOX */
+        .chart-box {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* CITY BREAKDOWN */
+        .city-totals {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .city-pill {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .city-pill:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .city-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .city-count {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* WORK REPORT TIMELINE */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0;
+            padding-bottom: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-month {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 32px 0 24px 48px;
+            position: relative;
+            display: inline-block;
+            background: white;
+            border: 1px solid var(--accent);
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.15);
+            padding: 8px 20px;
+            border-radius: 100px;
+        }
+
+        .timeline-month:first-child {
+            margin-top: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding-left: 48px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 14px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.3);
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .timeline-content {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
+        }
+
+        .timeline-content p {
+            font-size: 15px;
+            margin: 0 0 10px 0;
+            color: var(--text);
+        }
+
+        .timeline-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .task-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: #e0f2fe;
+            color: #0284c7;
+            padding: 4px 10px;
+            border-radius: 100px;
+            margin-right: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 60px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .summary-grid,
+            .monthly-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-section h1 {
+                font-size: 26px;
+            }
+
+            .tabs {
+                padding-bottom: 2px;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- HEADER -->
+        <header style="align-items: flex-start; border-bottom: 1px solid var(--border); padding-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <!-- TBT Logo Space -->
+                <div
+                    style="width: 64px; height: 64px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border); padding: 4px;">
+                    <img id="tbt-logo" src="tbt logo.jpg" alt="TBT Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; font-size: 11px; color: var(--muted); text-align: center;">
+                </div>
+
+                <div style="font-size: 24px; color: #cbd5e1; font-weight: 300;">×</div>
+
+                <!-- Heguru Logo Space -->
+                <div
+                    style="width: 64px; height: 64px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border); padding: 4px;">
+                    <img id="heguru-logo" src="heguru logo.jpg" alt="Heguru Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; font-size: 11px; color: var(--muted); text-align: center;">
+                </div>
+
+                <div class="brand-section" style="margin-left: 12px;">
+                    <h1 style="font-size: 28px; margin-bottom: 4px; color: var(--text);">Agency Performance &amp; Work
+                        Report</h1>
+                    <p style="color: var(--muted); font-size: 15px;">Tamil Business Tribe × Heguru India · Comprehensive
+                        Results & Work Logs</p>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px; margin-top: 8px;">
+                <div class="date-badge">
+                    Last Updated: 31 March 2026
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1KC47i60kBEXfznsMqfVFk84ZRinaa5_W78wX4iKqjLk/edit?usp=sharing" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; text-decoration: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    View Live Data feed
+                </a>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <div class="tab-btn active" onclick="switchTab('dashboard', event)">Dashboard</div>
+            <div class="tab-btn" onclick="switchTab('summary', event)">Summary</div>
+            <div class="tab-btn" onclick="switchTab('meta-performance', event)">Meta Performance</div>
+            <div class="tab-btn" onclick="switchTab('work-report', event)">Work Report</div>
+        </div>
+
+        <!-- 1. DASHBOARD TAB -->
+        <div id="tab-dashboard" class="tab-content active">
+            <!-- OVERALL TOP STATS -->
+            <div class="summary-grid">
+                <div class="summary-card spend">
+                    <div class="summary-label">Total Ad Spend</div>
+                    <div class="summary-value" id="total-spend">₹520,773</div>
+                    <div class="summary-subtext">Cumulative across 10 campaigns</div>
+                </div>
+                <div class="summary-card leads">
+                    <div class="summary-label">Total Leads Generated</div>
+                    <div class="summary-value" id="total-leads">2,356</div>
+                    <div class="summary-subtext"><span class="trend-up">↑ 2,356</span> Highly targeted leads</div>
+                </div>
+                <div class="summary-card cpl">
+                    <div class="summary-label">Average CPL</div>
+                    <div class="summary-value" id="avg-cpl">₹221.04</div>
+                    <div class="summary-subtext">Total Impressions: 2.7M+</div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Performance Trends</h2>
+            </div>
+            <div class="chart-box">
+                <canvas id="performanceChart" height="100"></canvas>
+            </div>
+        </div>
+
+        <!-- 2. SUMMARY TAB -->
+        <div id="tab-summary" class="tab-content">
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Month-wise Summary</h2>
+            </div>
+            <div class="monthly-grid">
+                <!-- JAN -->
+                <div class="month-card">
+                    <div class="month-name">
+                        January 2026
+                        <span class="month-badge">Startup Phase</span>
+                    </div>
+                    <div class="month-stats">
+                        <div class="mini-stat">
+                            <div class="mini-label">Spend</div>
+                            <div class="mini-value">₹14,553</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Leads</div>
+                            <div class="mini-value">109</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Avg CPL</div>
+                            <div class="mini-value">₹133.51</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Campaigns</div>
+                            <div class="mini-value">Chennai</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEB -->
+                <div class="month-card">
+                    <div class="month-name">
+                        February 2026
+                        <span class="month-badge">Scaling Phase</span>
+                    </div>
+                    <div class="month-stats">
+                        <div class="mini-stat">
+                            <div class="mini-label">Spend</div>
+                            <div class="mini-value">₹113,448</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Leads</div>
+                            <div class="mini-value">730</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Avg CPL</div>
+                            <div class="mini-value">₹155.41</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Campaigns</div>
+                            <div class="mini-value">+BLR, +CBE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAR -->
+                <div class="month-card"
+                    style="border-color: var(--accent); box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1);">
+                    <div class="month-name" style="color: var(--accent);">
+                        March 2026
+                        <span class="month-badge" style="background: #ffedd5; color: var(--accent);">Full Growth</span>
+                    </div>
+                    <div class="month-stats">
+                        <div class="mini-stat">
+                            <div class="mini-label">Spend</div>
+                            <div class="mini-value">₹315,282</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Leads</div>
+                            <div class="mini-value">1,182</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Avg CPL</div>
+                            <div class="mini-value">₹266.74</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Campaigns</div>
+                            <div class="mini-value">7 Cities</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. META PERFORMANCE TAB -->
+        <div id="tab-meta-performance" class="tab-content">
+            <!-- CAMPAIGN RESULTS DETAILED -->
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Campaign Results (City Breakdown)</h2>
+            </div>
+            <div class="city-totals"
+                style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px;">
+                <div class="city-pill" style="border-left: 4px solid var(--blue);">
+                    <div class="city-name">1. Chennai (CHE) <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            19/01/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">742 Leads · ₹1.57L Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--accent);">
+                    <div class="city-name">2. Coimbatore (CBE) <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            27/01/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">311 Leads · ₹92.0K Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--accent);">
+                    <div class="city-name">3. Bangalore (BLR) <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            27/01/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">581 Leads · ₹85.4K Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--accent);">
+                    <div class="city-name">4. Hyderabad (HYD) <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            27/01/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">454 Leads · ₹70.2K Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--green);">
+                    <div class="city-name">5. Trichy <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            05/03/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">60 Leads · ₹38.8K Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--green);">
+                    <div class="city-name">6. Pondy <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            05/03/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">45 Leads · ₹38.9K Spend</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--green);">
+                    <div class="city-name">7. Pune <span
+                            style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
+                            05/03/2026)</span></div>
+                    <div class="city-count" style="font-size: 15px;">163 Leads · ₹38.9K Spend</div>
+                </div>
+            </div>
+
+            <!-- LEAD QUALITY -->
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Lead Quality Breakdown (March Total)</h2>
+            </div>
+            <div class="city-totals"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 40px;">
+                <div class="city-pill">
+                    <div class="city-name">Qualified Leads</div>
+                    <div class="city-count">174</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">RNR / Follow-up</div>
+                    <div class="city-count">558</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Hot Leads</div>
+                    <div class="city-count">312</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Warm Leads</div>
+                    <div class="city-count">426</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Cold Leads</div>
+                    <div class="city-count">85</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Disqualified</div>
+                    <div class="city-count">44</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. WORK REPORT TAB -->
+        <div id="tab-work-report" class="tab-content">
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Monthly Work Report (Date Order)</h2>
+            </div>
+
+            <p style="color: var(--muted); margin-bottom: 32px; font-size: 14px;">Log of operations, WhatsApp
+                discussions, data handoffs, and campaign setups executed over the timeline.</p>
+
+
+            <div class="timeline">
+
+                <div class="timeline-month">March 2026</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">30 Mar 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Optimization</span> <span class="task-tag">Landing Page</span>
+                            <strong>Final Landing Page Delivery & UX Polish</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Executed complete structural update of the Hero
+                            section. Integrated dynamic YouTube Shorts testimonials and optimized Call-to-Action
+                            consistency across mobile frameworks. Processed new creative footage for future ad-scaling.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">23 Mar 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Monitoring</span> <span class="task-tag">Sales Ops</span>
+                            <strong>Sales Reporting System Enforced</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Mandated strict sales reporting protocols
+                            utilizing synchronized data sheets to ensure accurate tracking and rapid resolution of fund
+                            alerts.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">06 Mar 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Operations</span> <strong>Seamless Team Handover Operations</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Conducted official handover protocols
+                            coordinating digital marketing and sales tracking processes to the client-side management
+                            team while maintaining oversight.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">05 Mar 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign Live
+                                on 05/03/2026</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Successfully scaled the digital footprint by
+                            activating comprehensive Ad campaigns targeting Trichy, Pondy, and Pune using validated new
+                            ad creatives.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-month">February 2026</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Feb 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Strategy</span> <strong>Budget Reallocation & Funnel Focus</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Conducted strategic reallocation of budgets to
+                            prioritize the prenatal focus segment while actively pausing the 6+ age tier across active
+                            locations to maximize core target lead generation.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">20 Feb 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Milestone</span> <strong>Validated Appointments Growth
+                                Achieved</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Conducted a rigorous dashboard alignment
+                            session marking a crucial milestone of 88 high-intent appointments booked securely
+                            reflecting a strong lead progression.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">03 Feb 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Integration</span> <span class="task-tag">ERP</span> <strong>Advanced
+                                Data Integration Set-up</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Established a structured path unifying TRYM CRM
+                            inputs with internal ERP mechanics using a dynamic Webhook approach mapping the entire cycle
+                            from initial Lead Registration to Final Admission.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-month">January 2026</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">28 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Strategy</span> <strong>Comprehensive Pipeline Stage
+                                Formulation</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Meticulously finalized a highly detailed sales
+                            pipeline delineating leads from early connection strategies into complex qualifications,
+                            long-distance tags, appointment phases, and registration checkpoints.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">27 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign Live
+                                on 27/01/2026</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Formally initiated the second wave of regional
+                            expansion beginning with robust ad deployment for Bangalore (BLR), Coimbatore (CBE), and
+                            Hyderabad (HYD) markets.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">22 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Training</span> <strong>Internal CRM & Calibration Protocols</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Facilitated end-to-end CRM process enablement
+                            for associate tiers centering effectively on lead validations, automated dashboards, robust
+                            IVR usage, and calendar synchronizations.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">19 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Milestone</span> <span class="task-tag">Launch</span>
+                            <strong>Campaign Live on 19/01/2026</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Activated fully authorized Meta Video ad
+                            frameworks in the primary Chennai region instigating the first wave of active lead
+                            generation metrics.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">13 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Architecture</span> <strong>Systems Architectural Blueprints
+                                Approved</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Designed extensive ZACX WhatsApp API parameters
+                            defining specific categorical metadata streams linking incoming audiences accurately into
+                            established system databases.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">06 Jan 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Delivery</span> <strong>Landing Page Final Infrastructure
+                                Delivered</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Deployed primary frontend changes consisting of
+                            rigorous multi-level validation parameters, rich testimonials sections, and finalized CRM
+                            lead flow mechanics.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-month">December 2025</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">29 Dec 2025</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Approval</span> <strong>Asset Readiness Signed Off</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Finalized reviews of landing pages and achieved
+                            core sign-offs on crucial performance assets like the VSL videos paving the way for backend
+                            technical setups.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Dec 2025</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Production</span> <strong>Professional Media Shoot Completed</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Coordinated comprehensive local site media
+                            capture featuring 10 custom ad copies alongside Video Sales Letter development integrating
+                            highly actionable CRM pipeline structuring on location.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">09 Dec 2025</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Onboarding</span> <strong>Strategic Ecosystem Discovery
+                                Initiated</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Completed deep Business Model structuring
+                            mapping out technical integration plans spanning advanced parent-interfacing funnels
+                            incorporating validation criteria and informational drops schedules.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">05 Dec 2025</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Kickoff</span> <strong>Project Commencement</strong></p>
+                        <p style="margin-top: 8px; color: var(--muted);">Originated the core digital sales tracking
+                            frameworks alongside the foundational strategic roadmap prioritizing parent-demographic
+                            psychological pain points and core structural brand strength mappings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 Tamil Business Tribe. Confidential Agency Report for Heguru India.
+        </footer>
+    </div>
+
+    <script>
+        // TAB SWITCH LOGIC
+        function switchTab(tabId, event) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button
+            if (event) {
+                event.currentTarget.classList.add('active');
+            }
+
+            // Show target tab content
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        // CHART RENDER LOGIC
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March'],
+                datasets: [
+                    {
+                        label: 'Ad Spend (₹)',
+                        data: [14553, 113448, 315282],
+                        borderColor: '#f97316',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: 'Leads Generated',
+                        data: [109, 730, 1182],
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y1',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                family: 'Sora',
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Spend (₹)'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                        title: {
+                            display: true,
+                            text: 'Leads'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
