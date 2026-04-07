@@ -549,11 +549,22 @@
                 </div>
             </div>
             <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px; margin-top: 8px;">
-                <div class="date-badge">
-                    Last Updated: 31 March 2026
+                <div class="date-badge" id="last-updated-badge">
+                    Last Updated: 06 April 2026
                 </div>
-                <a href="https://docs.google.com/spreadsheets/d/1KC47i60kBEXfznsMqfVFk84ZRinaa5_W78wX4iKqjLk/edit?usp=sharing" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; text-decoration: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <a href="https://docs.google.com/spreadsheets/d/1KC47i60kBEXfznsMqfVFk84ZRinaa5_W78wX4iKqjLk/edit?usp=sharing"
+                    target="_blank"
+                    style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; text-decoration: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
                     View Live Data feed
                 </a>
             </div>
@@ -573,18 +584,19 @@
             <div class="summary-grid">
                 <div class="summary-card spend">
                     <div class="summary-label">Total Ad Spend</div>
-                    <div class="summary-value" id="total-spend">₹520,773</div>
-                    <div class="summary-subtext">Cumulative across 10 campaigns</div>
+                    <div class="summary-value" id="total-spend">₹5,90,467</div>
+                    <div class="summary-subtext">Cumulative across all campaigns</div>
                 </div>
                 <div class="summary-card leads">
                     <div class="summary-label">Total Leads Generated</div>
-                    <div class="summary-value" id="total-leads">2,356</div>
-                    <div class="summary-subtext"><span class="trend-up">↑ 2,356</span> Highly targeted leads</div>
+                    <div class="summary-value" id="total-leads">2,448</div>
+                    <div class="summary-subtext"><span class="trend-up" id="total-leads-trend">↑ 2,448</span> Highly
+                        targeted leads</div>
                 </div>
                 <div class="summary-card cpl">
                     <div class="summary-label">Average CPL</div>
-                    <div class="summary-value" id="avg-cpl">₹221.04</div>
-                    <div class="summary-subtext">Total Impressions: 2.7M+</div>
+                    <div class="summary-value" id="avg-cpl">₹241.20</div>
+                    <div class="summary-subtext">Total Impressions: 1,78,652 (Apr)</div>
                 </div>
             </div>
 
@@ -608,7 +620,6 @@
                 <div class="month-card">
                     <div class="month-name">
                         January 2026
-                        <span class="month-badge">Startup Phase</span>
                     </div>
                     <div class="month-stats">
                         <div class="mini-stat">
@@ -634,7 +645,6 @@
                 <div class="month-card">
                     <div class="month-name">
                         February 2026
-                        <span class="month-badge">Scaling Phase</span>
                     </div>
                     <div class="month-stats">
                         <div class="mini-stat">
@@ -657,11 +667,9 @@
                 </div>
 
                 <!-- MAR -->
-                <div class="month-card"
-                    style="border-color: var(--accent); box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1);">
-                    <div class="month-name" style="color: var(--accent);">
+                <div class="month-card">
+                    <div class="month-name">
                         March 2026
-                        <span class="month-badge" style="background: #ffedd5; color: var(--accent);">Full Growth</span>
                     </div>
                     <div class="month-stats">
                         <div class="mini-stat">
@@ -682,6 +690,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- APR -->
+                <div class="month-card"
+                    style="border-color: var(--accent); box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1);">
+                    <div class="month-name" style="color: var(--accent);">
+                        April 2026
+                        <span class="month-badge" style="background: #ffedd5; color: var(--accent);">Live ·
+                            Ongoing</span>
+                    </div>
+                    <div class="month-stats">
+                        <div class="mini-stat">
+                            <div class="mini-label">Spend (so far)</div>
+                            <div class="mini-value" id="apr-spend">₹69,694</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Leads</div>
+                            <div class="mini-value" id="apr-leads">92</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Avg CPL</div>
+                            <div class="mini-value" id="apr-cpl">₹757.54</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-label">Clicks</div>
+                            <div class="mini-value" id="apr-clicks">1,447</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -698,47 +734,84 @@
                     <div class="city-name">1. Chennai (CHE) <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             19/01/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">742 Leads · ₹1.57L Spend</div>
+                    <div class="city-count" style="font-size: 15px;">761 Leads · ₹1.73L Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--accent);">
                     <div class="city-name">2. Coimbatore (CBE) <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             27/01/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">311 Leads · ₹92.0K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">315 Leads · ₹1.01L Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--accent);">
                     <div class="city-name">3. Bangalore (BLR) <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             27/01/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">581 Leads · ₹85.4K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">612 Leads · ₹95.2K Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--accent);">
                     <div class="city-name">4. Hyderabad (HYD) <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             27/01/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">454 Leads · ₹70.2K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">480 Leads · ₹80.2K Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--green);">
                     <div class="city-name">5. Trichy <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             05/03/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">60 Leads · ₹38.8K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">65 Leads · ₹48.4K Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--green);">
                     <div class="city-name">6. Pondy <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             05/03/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">45 Leads · ₹38.9K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">47 Leads · ₹48.4K Spend</div>
                 </div>
                 <div class="city-pill" style="border-left: 4px solid var(--green);">
                     <div class="city-name">7. Pune <span
                             style="font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px;">(Live:
                             05/03/2026)</span></div>
-                    <div class="city-count" style="font-size: 15px;">163 Leads · ₹38.9K Spend</div>
+                    <div class="city-count" style="font-size: 15px;">183 Leads · ₹48.9K Spend</div>
                 </div>
             </div>
 
-            <!-- LEAD QUALITY -->
+            <!-- LEAD QUALITY (APRIL) -->
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Lead Quality Breakdown (April Total)</h2>
+            </div>
+            <div class="city-totals"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 40px;">
+                <div class="city-pill">
+                    <div class="city-name">Qualified Leads</div>
+                    <div class="city-count">17</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">RNR / Follow-up</div>
+                    <div class="city-count">35</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Hot Leads</div>
+                    <div class="city-count">16</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Warm Leads</div>
+                    <div class="city-count">18</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Cold Leads</div>
+                    <div class="city-count">12</div>
+                </div>
+                <div class="city-pill">
+                    <div class="city-name">Disqualified</div>
+                    <div class="city-count">0</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--green);">
+                    <div class="city-name">Revenue Generated</div>
+                    <div class="city-count" style="color: var(--green);">₹3,360</div>
+                </div>
+            </div>
+
+            <!-- LEAD QUALITY (MARCH) -->
             <div class="section-header">
                 <div class="line-accent"></div>
                 <h2>Lead Quality Breakdown (March Total)</h2>
@@ -755,19 +828,23 @@
                 </div>
                 <div class="city-pill">
                     <div class="city-name">Hot Leads</div>
-                    <div class="city-count">312</div>
+                    <div class="city-count">383</div>
                 </div>
                 <div class="city-pill">
                     <div class="city-name">Warm Leads</div>
-                    <div class="city-count">426</div>
+                    <div class="city-count">504</div>
                 </div>
                 <div class="city-pill">
                     <div class="city-name">Cold Leads</div>
-                    <div class="city-count">85</div>
+                    <div class="city-count">110</div>
                 </div>
                 <div class="city-pill">
                     <div class="city-name">Disqualified</div>
                     <div class="city-count">44</div>
+                </div>
+                <div class="city-pill" style="border-left: 4px solid var(--green);">
+                    <div class="city-name">Revenue Generated</div>
+                    <div class="city-count" style="color: var(--green);">₹12,800</div>
                 </div>
             </div>
         </div>
@@ -785,7 +862,41 @@
 
             <div class="timeline">
 
+                <div class="timeline-month">April 2026</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">03 Apr 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Campaigns</span> <span class="task-tag">Creative Live</span>
+                            <strong>New Video Creative Deployed</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Officially set the new requested video creative
+                            live for the active campaigns in Pune, Hyderabad, and Bangalore. Alerted @Bala Bro TBT and
+                            @~Ishwarya Kumar regarding the live status to monitor initial scale data.
+                        </p>
+                    </div>
+                </div>
+
+
+
                 <div class="timeline-month">March 2026</div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">31 Mar 2026</div>
+                    <div class="timeline-content">
+                        <p><span class="task-tag">Optimization</span> <span class="task-tag">Ads Strategy</span>
+                            <strong>Ad Strategy Shift & Creative Replacements</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Paused all campaigns utilizing the older Deepa
+                            mam ad creatives. Officially launched and redirected focus on Pune, Hyderabad, and Bangalore
+                            using the new top-performing video creative. Additionally requested the production team
+                            (Ishwarya Kumar) to urgently arrange two more matching ad videos to ensure stable, scalable
+                            performance across these new live locations.
+                        </p>
+                    </div>
+                </div>
 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
@@ -794,9 +905,11 @@
                         <p><span class="task-tag">Optimization</span> <span class="task-tag">Landing Page</span>
                             <strong>Final Landing Page Delivery & UX Polish</strong>
                         </p>
-                        <p style="margin-top: 8px; color: var(--muted);">Executed complete structural update of the Hero
+                        <p style="margin-top: 8px; color: var(--muted);">Executed complete structural update of the
+                            Hero
                             section. Integrated dynamic YouTube Shorts testimonials and optimized Call-to-Action
-                            consistency across mobile frameworks. Processed new creative footage for future ad-scaling.
+                            consistency across mobile frameworks. Processed new creative footage for future
+                            ad-scaling.
                         </p>
                     </div>
                 </div>
@@ -809,7 +922,8 @@
                             <strong>Sales Reporting System Enforced</strong>
                         </p>
                         <p style="margin-top: 8px; color: var(--muted);">Mandated strict sales reporting protocols
-                            utilizing synchronized data sheets to ensure accurate tracking and rapid resolution of fund
+                            utilizing synchronized data sheets to ensure accurate tracking and rapid resolution of
+                            fund
                             alerts.</p>
                     </div>
                 </div>
@@ -818,10 +932,12 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">06 Mar 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Operations</span> <strong>Seamless Team Handover Operations</strong>
+                        <p><span class="task-tag">Operations</span> <strong>Seamless Team Handover
+                                Operations</strong>
                         </p>
                         <p style="margin-top: 8px; color: var(--muted);">Conducted official handover protocols
-                            coordinating digital marketing and sales tracking processes to the client-side management
+                            coordinating digital marketing and sales tracking processes to the client-side
+                            management
                             team while maintaining oversight.</p>
                     </div>
                 </div>
@@ -830,10 +946,13 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">05 Mar 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign Live
+                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign
+                                Live
                                 on 05/03/2026</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Successfully scaled the digital footprint by
-                            activating comprehensive Ad campaigns targeting Trichy, Pondy, and Pune using validated new
+                        <p style="margin-top: 8px; color: var(--muted);">Successfully scaled the digital footprint
+                            by
+                            activating comprehensive Ad campaigns targeting Trichy, Pondy, and Pune using validated
+                            new
                             ad creatives.</p>
                     </div>
                 </div>
@@ -844,10 +963,13 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">24 Feb 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Strategy</span> <strong>Budget Reallocation & Funnel Focus</strong>
+                        <p><span class="task-tag">Strategy</span> <strong>Budget Reallocation & Funnel
+                                Focus</strong>
                         </p>
-                        <p style="margin-top: 8px; color: var(--muted);">Conducted strategic reallocation of budgets to
-                            prioritize the prenatal focus segment while actively pausing the 6+ age tier across active
+                        <p style="margin-top: 8px; color: var(--muted);">Conducted strategic reallocation of budgets
+                            to
+                            prioritize the prenatal focus segment while actively pausing the 6+ age tier across
+                            active
                             locations to maximize core target lead generation.</p>
                     </div>
                 </div>
@@ -868,10 +990,14 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">03 Feb 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Integration</span> <span class="task-tag">ERP</span> <strong>Advanced
-                                Data Integration Set-up</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Established a structured path unifying TRYM CRM
-                            inputs with internal ERP mechanics using a dynamic Webhook approach mapping the entire cycle
+                        <p><span class="task-tag">Integration</span> <span class="task-tag">ERP</span>
+                            <strong>Advanced
+                                Data Integration Set-up</strong>
+                        </p>
+                        <p style="margin-top: 8px; color: var(--muted);">Established a structured path unifying TRYM
+                            CRM
+                            inputs with internal ERP mechanics using a dynamic Webhook approach mapping the entire
+                            cycle
                             from initial Lead Registration to Final Admission.</p>
                     </div>
                 </div>
@@ -884,7 +1010,8 @@
                     <div class="timeline-content">
                         <p><span class="task-tag">Strategy</span> <strong>Comprehensive Pipeline Stage
                                 Formulation</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Meticulously finalized a highly detailed sales
+                        <p style="margin-top: 8px; color: var(--muted);">Meticulously finalized a highly detailed
+                            sales
                             pipeline delineating leads from early connection strategies into complex qualifications,
                             long-distance tags, appointment phases, and registration checkpoints.</p>
                     </div>
@@ -894,9 +1021,11 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">27 Jan 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign Live
+                        <p><span class="task-tag">Scale</span> <span class="task-tag">Ads</span> <strong>Campaign
+                                Live
                                 on 27/01/2026</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Formally initiated the second wave of regional
+                        <p style="margin-top: 8px; color: var(--muted);">Formally initiated the second wave of
+                            regional
                             expansion beginning with robust ad deployment for Bangalore (BLR), Coimbatore (CBE), and
                             Hyderabad (HYD) markets.</p>
                     </div>
@@ -906,10 +1035,13 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">22 Jan 2026</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Training</span> <strong>Internal CRM & Calibration Protocols</strong>
+                        <p><span class="task-tag">Training</span> <strong>Internal CRM & Calibration
+                                Protocols</strong>
                         </p>
-                        <p style="margin-top: 8px; color: var(--muted);">Facilitated end-to-end CRM process enablement
-                            for associate tiers centering effectively on lead validations, automated dashboards, robust
+                        <p style="margin-top: 8px; color: var(--muted);">Facilitated end-to-end CRM process
+                            enablement
+                            for associate tiers centering effectively on lead validations, automated dashboards,
+                            robust
                             IVR usage, and calendar synchronizations.</p>
                     </div>
                 </div>
@@ -933,8 +1065,10 @@
                     <div class="timeline-content">
                         <p><span class="task-tag">Architecture</span> <strong>Systems Architectural Blueprints
                                 Approved</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Designed extensive ZACX WhatsApp API parameters
-                            defining specific categorical metadata streams linking incoming audiences accurately into
+                        <p style="margin-top: 8px; color: var(--muted);">Designed extensive ZACX WhatsApp API
+                            parameters
+                            defining specific categorical metadata streams linking incoming audiences accurately
+                            into
                             established system databases.</p>
                     </div>
                 </div>
@@ -945,8 +1079,10 @@
                     <div class="timeline-content">
                         <p><span class="task-tag">Delivery</span> <strong>Landing Page Final Infrastructure
                                 Delivered</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Deployed primary frontend changes consisting of
-                            rigorous multi-level validation parameters, rich testimonials sections, and finalized CRM
+                        <p style="margin-top: 8px; color: var(--muted);">Deployed primary frontend changes
+                            consisting of
+                            rigorous multi-level validation parameters, rich testimonials sections, and finalized
+                            CRM
                             lead flow mechanics.</p>
                     </div>
                 </div>
@@ -958,8 +1094,10 @@
                     <div class="timeline-date">29 Dec 2025</div>
                     <div class="timeline-content">
                         <p><span class="task-tag">Approval</span> <strong>Asset Readiness Signed Off</strong></p>
-                        <p style="margin-top: 8px; color: var(--muted);">Finalized reviews of landing pages and achieved
-                            core sign-offs on crucial performance assets like the VSL videos paving the way for backend
+                        <p style="margin-top: 8px; color: var(--muted);">Finalized reviews of landing pages and
+                            achieved
+                            core sign-offs on crucial performance assets like the VSL videos paving the way for
+                            backend
                             technical setups.</p>
                     </div>
                 </div>
@@ -968,10 +1106,12 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">24 Dec 2025</div>
                     <div class="timeline-content">
-                        <p><span class="task-tag">Production</span> <strong>Professional Media Shoot Completed</strong>
+                        <p><span class="task-tag">Production</span> <strong>Professional Media Shoot
+                                Completed</strong>
                         </p>
                         <p style="margin-top: 8px; color: var(--muted);">Coordinated comprehensive local site media
-                            capture featuring 10 custom ad copies alongside Video Sales Letter development integrating
+                            capture featuring 10 custom ad copies alongside Video Sales Letter development
+                            integrating
                             highly actionable CRM pipeline structuring on location.</p>
                     </div>
                 </div>
@@ -1025,14 +1165,14 @@
 
         // CHART RENDER LOGIC
         const ctx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(ctx, {
+        window.perfChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['January', 'February', 'March'],
+                labels: ['January', 'February', 'March', 'April (so far)'],
                 datasets: [
                     {
                         label: 'Ad Spend (₹)',
-                        data: [14553, 113448, 315282],
+                        data: [14553, 113448, 315282, 69694],
                         borderColor: '#f97316',
                         backgroundColor: 'rgba(249, 115, 22, 0.1)',
                         tension: 0.4,
@@ -1041,7 +1181,7 @@
                     },
                     {
                         label: 'Leads Generated',
-                        data: [109, 730, 1182],
+                        data: [109, 730, 1182, 92],
                         borderColor: '#22c55e',
                         backgroundColor: 'rgba(34, 197, 94, 0.1)',
                         tension: 0.4,
@@ -1092,6 +1232,117 @@
                     }
                 }
             }
+        });
+
+        // AUTO-SYNC GOOGLE SHEET (APRIL DATA)
+        async function fetchAprilData() {
+            try {
+                // Use Google's native Visualization API which natively supports CORS (No proxy needed!)
+                const timestamp = new Date().getTime();
+                const sheetUrl = `https://docs.google.com/spreadsheets/d/1KC47i60kBEXfznsMqfVFk84ZRinaa5_W78wX4iKqjLk/gviz/tq?tqx=out:csv&gid=1690492792&nocache=${timestamp}`;
+
+                const response = await fetch(sheetUrl, { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to fetch data');
+                const csvText = await response.text();
+
+                const rows = csvText.split('\n');
+                // In Google's gviz CSV, the "Total" row is always the second row (index 1)
+                const totalRow = rows[1];
+                if (!totalRow) return;
+
+                let cols = [];
+                let curr = '';
+                let quote = false;
+                for (let i = 0; i < totalRow.length; i++) {
+                    const char = totalRow[i];
+                    if (char === '"') { quote = !quote; }
+                    else if (char === ',' && !quote) { cols.push(curr); curr = ''; }
+                    else { curr += char; }
+                }
+                cols.push(curr);
+
+                const parseMoney = str => Number(str.replace(/[^0-9.-]+/g, ""));
+                const aprSpend = parseMoney(cols[1]); // e.g. "₹69,693.59"
+                const aprLeads = parseMoney(cols[8]); // e.g. 92
+                const aprCpl = parseMoney(cols[9]); // e.g. 757.54
+                const aprClicks = parseMoney(cols[5]); // e.g. 1447
+
+                // Historical Data constants (Jan, Feb, March)
+                const histSpend = 443283;
+                const histLeads = 2021;
+
+                const newTotalSpend = histSpend + aprSpend;
+                const newTotalLeads = histLeads + aprLeads;
+                const newAvgCpl = newTotalSpend / newTotalLeads;
+
+                const fm = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format;
+                const fmCur = (num, dec = 0) => '₹' + new Intl.NumberFormat('en-IN', { maximumFractionDigits: dec, minimumFractionDigits: dec }).format(num);
+
+                // Overview Board Update
+                const elTotSpend = document.getElementById('total-spend');
+                if (elTotSpend) elTotSpend.textContent = fmCur(newTotalSpend);
+
+                const elTotLeads = document.getElementById('total-leads');
+                if (elTotLeads) elTotLeads.textContent = fm(newTotalLeads);
+
+                const elTotLeadsTrend = document.getElementById('total-leads-trend');
+                if (elTotLeadsTrend) elTotLeadsTrend.textContent = '↑ ' + fm(newTotalLeads);
+
+                const elAvgCpl = document.getElementById('avg-cpl');
+                if (elAvgCpl) elAvgCpl.textContent = fmCur(newAvgCpl, 2);
+
+                // April Summary Card
+                const elAprSpend = document.getElementById('apr-spend');
+                if (elAprSpend) elAprSpend.textContent = fmCur(aprSpend);
+
+                const elAprLeads = document.getElementById('apr-leads');
+                if (elAprLeads) elAprLeads.textContent = fm(aprLeads);
+
+                const elAprCpl = document.getElementById('apr-cpl');
+                if (elAprCpl) elAprCpl.textContent = fmCur(aprCpl, 2);
+
+                const elAprClicks = document.getElementById('apr-clicks');
+                if (elAprClicks) elAprClicks.textContent = fm(aprClicks);
+
+                // Update Top Date Badge Latest Progress Date
+                let lastUpdatedDateStr = '06 April 2026';
+                for (let r = rows.length - 1; r >= 0; r--) {
+                    const line = rows[r];
+                    if (!line || !line.trim()) continue;
+
+                    // Remove all quotes for parsing safely
+                    const cleanLine = line.replace(/(^"|"$|""|")/g, '');
+                    const colsData = cleanLine.split(',');
+                    const rowDateStr = colsData[0];
+                    const rowSpendStr = colsData[1];
+
+                    if (rowDateStr && rowDateStr.includes('/') && parseMoney(rowSpendStr) > 0) {
+                        const parts = rowDateStr.split('/');
+                        if (parts.length === 3) {
+                            const dateObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+                            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                            lastUpdatedDateStr = `${parts[0]} ${monthNames[dateObj.getMonth()]} ${parts[2]}`;
+                        }
+                        break;
+                    }
+                }
+                const elDateBadge = document.getElementById('last-updated-badge');
+                if (elDateBadge) elDateBadge.textContent = 'Last Updated: ' + lastUpdatedDateStr;
+
+                // Update Chart Data (index 3 is April)
+                if (window.perfChart && window.perfChart.data.datasets) {
+                    window.perfChart.data.datasets[0].data[3] = Math.round(aprSpend);
+                    window.perfChart.data.datasets[1].data[3] = Math.round(aprLeads);
+                    window.perfChart.update();
+                }
+            } catch (e) {
+                console.error('Automatically syncing April spreadsheet failed:', e);
+            }
+        }
+
+        // Bind the auto-update
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchAprilData();
         });
     </script>
 </body>
